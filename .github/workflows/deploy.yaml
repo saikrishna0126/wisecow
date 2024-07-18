@@ -32,18 +32,26 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t wisecow:latest .
-        docker push saikrishna38721/wisecow:latest
+        docker build -t wisecow .
+        docker push wisecow saikrishna38721/wisecow
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up kubectl
       uses: azure/setup-kubectl@v1
       with:
         version: 'latest'
+
+    - name: Decode and configure kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+        kubectl get nodes  # Verify access to the cluster
 
     - name: Deploy to Kubernetes
       run: |
