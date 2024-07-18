@@ -33,7 +33,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker build -t wisecow .
-        docker push wisecow saikrishna38721/wisecow
+        docker push saikrishna38721/wisecow
 
   deploy:
     runs-on: ubuntu-latest
