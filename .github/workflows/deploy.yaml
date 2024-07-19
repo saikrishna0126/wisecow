@@ -18,6 +18,10 @@ jobs:
         mkdir -p $HOME/.kube
         echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
         ls -l $HOME/.kube
+        cat $HOME/.kube/config
+
+    - name: View kubeconfig
+      run: kubectl config view
 
     - name: Apply Kubernetes manifests
       run: |
