@@ -28,9 +28,7 @@ jobs:
         docker push saikrishna38721/wisecow:latest
 
     - name: Set up kubeconfig
-      run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+      run: echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
     - name: Apply Kubernetes manifests
       run: |
